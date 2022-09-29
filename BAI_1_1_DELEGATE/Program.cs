@@ -26,12 +26,14 @@ namespace BAI_1_1_DELEGATE
         static void Main(string[] args)
         {
             Console.OutputEncoding = Encoding.UTF8;
-            int? a = null;
+            int? a = null;  //? để có thể gán thêm được dữ liệu null
             #region Phần 1:Khởi tạo delegate null
             Console.WriteLine("==PHần 1: Khởi tạo delegate null==");
             ThongBao thongbao = null; //Khai báo 1 cái delegate gán = null
             thongbao = ThongTin1; // Tham chiếu đến phương thức thì delegate sẽ trỏ đến phương thức đó
-            thongbao?.Invoke("Chào các bạn đến C# 2"); //Dấu hỏi để kiểm tra phương thức đó có null không và nếu không sẽ thực thi
+            thongbao("afser");
+            thongbao?.Invoke("adf"); //Dấu hỏi để kiểm tra phương thức đó có null không và nếu không sẽ thực thi
+            
             #endregion
 
             #region Phần 2: Khởi tạo 1 delegate
