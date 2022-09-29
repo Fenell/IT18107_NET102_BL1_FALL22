@@ -27,7 +27,7 @@ namespace LAB
 
         public override void InRaManHinh()
         {
-            Console.WriteLine($"{Ho} -- {TenDem}-- {Ten} -- {MaSv} -- {NamSinh} -- {DiemCSharp} -- {(GioiTinh == 0 ? "Nam" : "Nữ")}, {QueQuan} ");
+            Console.WriteLine($"{Ho} {TenDem} {Ten} -- {MaSv} -- {NamSinh} -- {DiemCSharp} -- {(GioiTinh == 0 ? "Nam" : "Nữ")}, {QueQuan} ");
         }
     }
 }

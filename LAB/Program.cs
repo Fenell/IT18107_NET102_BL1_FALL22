@@ -16,11 +16,11 @@ namespace LAB
             StudentService studentService = new StudentService();
             do
             {
-                Console.WriteLine("============Meunu===========");
+                Console.WriteLine("============Menu===========");
                 Console.WriteLine("1. Thêm sinh viên");
                 Console.WriteLine("2. Sửa thông tin sinh viên");
                 Console.WriteLine("3. Xoá thông tin sinh viên");
-                Console.WriteLine("4. Tìm kiếm sinh viên");
+                Console.WriteLine("4. Tìm kiếm sinh viên nâng cao");
                 Console.WriteLine("5. Xuất thông tin sinh viên");
                 Console.WriteLine("0. Thoát");
                 Console.WriteLine("---------------------------");
@@ -38,7 +38,7 @@ namespace LAB
                         studentService.deleteStudent();
                         break;
                     case "4":
-                        studentService.FindStudent();
+                        studentService.FindStudentAdvanced();
                         break;
                     case "5":
                         studentService.DisplayStudent();

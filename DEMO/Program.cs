@@ -40,10 +40,19 @@ namespace DEMO
             //    numberbyte = stream.Read(buffer, offset, count); // đọc 5 byte tiếp theo
             //    Console.WriteLine();
 
-            int abc = 1;
-            var byte_abc = BitConverter.GetBytes(abc);
-            Console.WriteLine($"{byte_abc}");
+            //    int abc = 1;
+            //    var byte_abc = BitConverter.GetBytes(abc);
+            //    Console.WriteLine($"{byte_abc}");
             //}
+
+            int[] IntArray = { 11, 22, 33, 44, 55 };
+            //Using Method Syntax
+            var IsExistsMS = IntArray.Contains(33);
+            //Using Query Syntax
+            //var IsExistsQS = (from num in IntArray
+            //                  select num).Contains(33);
+            Console.WriteLine(IsExistsMS);
+            Console.ReadKey();
         }
     }
 }
