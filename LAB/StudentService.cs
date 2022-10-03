@@ -30,18 +30,20 @@ namespace LAB
             };
         }
 
-        //public void writeStudent(string path, List<Student> students )
+        //public void writeStudent(string filepath)
         //{
         //    BinaryFormatter binaryFormatter = new BinaryFormatter();
-        //    _QlStudent = new FileStream(path, FileMode.Create);
-        //    binaryFormatter.Serialize(_QlStudent, students);
+        //    _QlStudent = new FileStream(filepath, FileMode.Append);
+        //    binaryFormatter.Serialize(_QlStudent, _lstStudents);
+        //    _QlStudent.Close();
         //}
 
-        //public List<Student> readStudent(string path)
+        //public List<Student> readStudent(string filepath)
         //{
-        //    _QlStudent = new FileStream(path, FileMode.Create);
+        //    _QlStudent = new FileStream(filepath, FileMode.Open);
         //    BinaryFormatter binaryFormatter = new BinaryFormatter();
         //    var data = binaryFormatter.Deserialize(_QlStudent) as List<Student>;
+        //    _QlStudent.Close();
         //    return data;
         //}
 
@@ -53,8 +55,7 @@ namespace LAB
 
         public int GetIndexValue()
         {
-            _delegate delegateInput = GetInput;
-            _input = delegateInput?.Invoke("mã sinh viên");
+            _input = GetInput("mã sinh viên");
             for (int i = 0; i < _lstStudents.Count; i++)
             {
                 if (_lstStudents[i].MaSv.ToLower() == _input.ToLower())
@@ -64,7 +65,7 @@ namespace LAB
             }
             return -1;
         }
-
+        //Thêm sinh viên vào danh sách
         public void addStudent()
         {
             do
@@ -90,24 +91,43 @@ namespace LAB
                 _input = Console.ReadLine();
             } while (_input == "y");
         }
-
+        //Sửa thông tin sinh viên
         public void EditStudent()
         {
             Func<int> delegateGetIndex = GetIndexValue;
             _index = delegateGetIndex();
             if (_index != -1)
             {
-                _lstStudents[_index].Ho = GetInput("họ mới");
-                _lstStudents[_index].TenDem = GetInput("tên đệm mới");
-                _lstStudents[_index].Ten = GetInput("tên mới");
-                Console.WriteLine("Sửa thành công");
+                Console.WriteLine("1. Sửa họ tên");
+                Console.WriteLine("2. Sửa điểm");
+                Console.WriteLine("0. Quay lại menu");
+                Console.Write("Mời bạn nhập: ");
+                string choose = Console.ReadLine();
+                switch (choose)
+                {
+                    case "1":
+                        _lstStudents[_index].Ho = GetInput("họ mới");
+                        _lstStudents[_index].TenDem = GetInput("tên đệm mới");
+                        _lstStudents[_index].Ten = GetInput("tên mới");
+                        Console.WriteLine("Sửa thành công");
+                        break;
+                    case "2":
+                        _lstStudents[_index].DiemCSharp = Convert.ToDouble(GetInput("điểm mới"));
+                        Console.WriteLine("Sửa thành công");
+                        break;
+                    case "0":
+                        break;
+                    default:
+                        Console.WriteLine("Chức năng không tồn tại");
+                        break;
+                }
                 Console.ReadKey();
                 return;
             }
             Console.WriteLine("Không tìm thấy sinh viên");
             Console.ReadKey();
         }
-
+        //Xoá sinh viên
         public void deleteStudent()
         {
             _index = GetIndexValue();
@@ -115,78 +135,86 @@ namespace LAB
             {
                 _lstStudents.RemoveAt(_index);
                 Console.WriteLine("Xoá thành công");
+                Console.ReadKey();
                 return;
             }
             Console.WriteLine("Không tìm thấy sinh viên");
             Console.ReadKey();
         }
         //Tìm kiếm nâng cao
-        public void FindStudentAdvanced()
+        public void FindStudent()
         {
-            Console.WriteLine("Bạn muốn tìm kiếm theo gì:");
-            Console.WriteLine("1. Theo mã sinh viên");
-            Console.WriteLine("2. Theo họ sinh viên");
-            Console.WriteLine("3. Theo tên sinh viên");
-            Console.Write("Nhập lựa chọn của bạn: ");
-            string choose = Console.ReadLine();
-            int count = 0;
-            switch (choose)
+            string choose;
+            do
             {
-                case "1":
-                    int index = GetIndexValue();
-                    if (index == -1)
-                    {
-                        Console.WriteLine("Không tìm thấy sinh viên");
-                        Console.ReadKey();
-                        return;
-                    }
-                    _lstStudents[index].InRaManHinh();
-                    Console.ReadKey();
-                    break;
-
-                case "2":
-
-                    _input = GetInput("họ sinh viên muốn tìm: ");
-                    for (int i = 0; i < _lstStudents.Count; i++)
-                    {
-                        if (_lstStudents[i].Ho.ToLower().Contains(_input.ToLower()) == true)
+                _delegate delegateInput = GetInput;
+                Console.WriteLine("1. Tìm kiếm theo mã sinh viên");
+                Console.WriteLine("2. Tìm kiếm gần đúng theo họ sinh viên");
+                Console.WriteLine("3. Tìm kiếm gần đúng theo tên sinh viên");
+                Console.WriteLine("0. Quay lại menu");
+                Console.Write("Nhập lựa chọn của bạn: ");
+                choose = Console.ReadLine();
+                int count = 0;
+                switch (choose)
+                {
+                    case "1":
+                        int index = GetIndexValue();
+                        if (index == -1)
                         {
-                            _lstStudents[i].InRaManHinh();
-                            count++;
+                            Console.WriteLine("Không tìm thấy sinh viên");
+                            Console.ReadKey();
+                            return;
                         }
-                    }
-                    Console.ReadKey();
-                    if (count == 0)
-                    {
-                        Console.WriteLine("Không tìm thấy sinh viên");
+                        _lstStudents[index].InRaManHinh();
                         Console.ReadKey();
-                    }
-                    break;
+                        break;
 
-                case "3":
-                    _input = GetInput("tên sinh viên muốn tìm: ");
-                    for (int i = 0; i < _lstStudents.Count; i++)
-                    {
-                        if (_lstStudents[i].Ten.ToLower().Contains(_input.ToLower()) == true)
+                    case "2":
+
+                        _input = delegateInput?.Invoke("họ sinh viên muốn tìm");
+                        for (int i = 0; i < _lstStudents.Count; i++)
                         {
-                            _lstStudents[i].InRaManHinh();
-                            count++;
+                            if (_lstStudents[i].Ho.ToLower().Contains(_input.ToLower()) == true)
+                            {
+                                _lstStudents[i].InRaManHinh();
+                                count++;
+                            }
                         }
-
-                    }
-                    Console.ReadKey();
-                    if (count == 0)
-                    {
-                        Console.WriteLine("Không tìm thấy sinh viên");
                         Console.ReadKey();
-                    }
-                    break;
-                default:
-                    Console.WriteLine("Chức năng không tồn tại");
-                    break;
-            }
+                        if (count == 0)
+                        {
+                            Console.WriteLine("Không tìm thấy sinh viên");
+                            Console.ReadKey();
+                        }
+                        break;
+
+                    case "3":
+                        _input = delegateInput?.Invoke("tên sinh viên muốn tìm");
+                        for (int i = 0; i < _lstStudents.Count; i++)
+                        {
+                            if (_lstStudents[i].Ten.ToLower().Contains(_input.ToLower()) == true)
+                            {
+                                _lstStudents[i].InRaManHinh();
+                                count++;
+                            }
+
+                        }
+                        Console.ReadKey();
+                        if (count == 0)
+                        {
+                            Console.WriteLine("Không tìm thấy sinh viên");
+                            Console.ReadKey();
+                        }
+                        break;
+                    case "0":
+                        break;
+                    default:
+                        Console.WriteLine("Chức năng không tồn tại");
+                        break;
+                }
+            } while (choose != "0");
         }
-
+        //Xuất danh sách sinh viên
         public void DisplayStudent()
         {
             _lstStudents.ForEach(x => x.InRaManHinh());

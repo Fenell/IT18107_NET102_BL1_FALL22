@@ -45,14 +45,16 @@ namespace DEMO
             //    Console.WriteLine($"{byte_abc}");
             //}
 
-            int[] IntArray = { 11, 22, 33, 44, 55 };
-            //Using Method Syntax
-            var IsExistsMS = IntArray.Contains(33);
-            //Using Query Syntax
-            //var IsExistsQS = (from num in IntArray
-            //                  select num).Contains(33);
-            Console.WriteLine(IsExistsMS);
-            Console.ReadKey();
+            //int[] IntArray = { 11, 22, 33, 44, 55 };
+            ////Using Method Syntax
+            //var IsExistsMS = IntArray.Contains(33);
+            ////Using Query Syntax
+            ////var IsExistsQS = (from num in IntArray
+            ////                  select num).Contains(33);
+            //Console.WriteLine(IsExistsMS);
+            //Console.ReadKey();
+            Console.WriteLine(String.Format("{0, -5}{1, -8}{2, -6}{3, -9}{4, -6}{5, -6}{6, -20}", "|  t", "|r", "|e"));
+
         }
     }
 }

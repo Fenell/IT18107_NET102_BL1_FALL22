@@ -38,7 +38,7 @@ namespace LAB
                         studentService.deleteStudent();
                         break;
                     case "4":
-                        studentService.FindStudentAdvanced();
+                        studentService.FindStudent();
                         break;
                     case "5":
                         studentService.DisplayStudent();
