@@ -84,7 +84,7 @@ namespace Assigment_1
         #endregion
 
         //Xuất danh sách mặt hàng
-        public void Display()
+        public void displayThucPham()
         {
             _lstHangThucPhams.ForEach(x => x.InRaManHinh());
             Console.ReadLine();

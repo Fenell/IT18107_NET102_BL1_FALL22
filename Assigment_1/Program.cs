@@ -50,7 +50,7 @@ namespace Assigment_1
                         break;
                     case "2":
                         hangHoaService.titleColumm();
-                        hangHoaService.Display();
+                        hangHoaService.displayThucPham();
                         break;
                     case "3":
                         hangHoaService.saveFile();
@@ -70,7 +70,8 @@ namespace Assigment_1
                         }
                         thucPhamEdit.MaHang = input.ToUpper(); //Gán lại mã thực phẩm của đối tượng cần sửa vào đối tượng tạm
                         Console.WriteLine(hangHoaService.editThucPham(thucPhamEdit)); //gán lại đối tượng tạm vào danh sách
-                        hangHoaService.Display();
+                        hangHoaService.titleColumm();
+                        hangHoaService.displayThucPham();
                         break;
                     case "5":
                         hangHoaService.filterThucPham();
